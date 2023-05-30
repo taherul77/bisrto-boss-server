@@ -48,7 +48,18 @@ app.get('/review',async(req,res)=>{
 
 })
 
+app.get('/cart', async(req, res)=>{
 
+const email = req.query.email;
+if(!email){
+  res.send([]);
+}
+const query = { email : email};
+const result = await cartCollection.find(query).toArray();
+res.send(result);
+
+
+})
 
 
 app.post('/cart', async(req,res)=>{
