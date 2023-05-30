@@ -33,6 +33,7 @@ async function run() {
 
 const menuCollection = client.db("bistro").collection("menu");
 const reviewCollection = client.db("bistro").collection("review");
+const cartCollection = client.db("bistro").collection("cart");
 
 app.get('/menu',async(req,res)=>{
   const cursor = menuCollection.find();
@@ -50,6 +51,17 @@ app.get('/review',async(req,res)=>{
 
 
 
+app.post('/cart', async(req,res)=>{
+
+  const item = req.body;
+  console.log(item);
+  const result = await cartCollection.insertOne(item);
+  res.send(result);
+})
+
+
+
+
 
 
     // Send a ping to confirm a successful connection
@@ -61,12 +73,6 @@ app.get('/review',async(req,res)=>{
   }
 }
 run().catch(console.dir);
-
-
-
-
-
-
 
 
 
